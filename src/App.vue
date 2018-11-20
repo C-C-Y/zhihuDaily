@@ -1,7 +1,9 @@
 <template>
   <div id="app">
-   
+    <keep-alive exclude="artical,comment">
     <router-view/>
+    </keep-alive>
+    
   </div>
 </template>
 <style lang="stylus">

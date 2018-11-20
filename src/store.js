@@ -7,54 +7,47 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     menuShow: false,
-    homeSwiperData: [],
-    articals: [],
+    artHeadShow: true,
     articalContent: {},
-    ArtExtraInfo: {}
+    ArtExtraInfo: {},
+    longComments: [],
+    shortComments: [],
+    headerOpacity: 1
   },
   mutations: {
-    handleShowMenu(state) {
+    menuShowChange(state) {
       state.menuShow = !state.menuShow;
     },
-    getHomeSwiper(state, res) {
-      state.homeSwiperData = res;
+    getArtContent(state, data) {
+      state.articalContent = data;
     },
-    getArtlist(state, res) {
-      state.articals.push(res);
+    getExtraInfo(state, data) {
+      state.ArtExtraInfo = data;
     },
-    getArtContent(state, res) {
-      state.articalContent = res;
+    hideArtHeader(state) {
+      state.headerOpacity = 0;
+      state.artHeadShow = false;
     },
-    getExtraInfo(state, res) {
-      state.ArtExtraInfo = res;
+    showArtHeader(state, opacity = 1) {
+      state.headerOpacity = opacity;
+      state.artHeadShow = true;
+    },
+    clearArtical(state) {
+      state.articalContent = {};
+      state.ArtExtraInfo = {};
+    },
+    clearComments(state) {
+      state.longComments = [];
+      state.shortComments = [];
+    },
+    getLongComments(state, data) {
+      state.longComments = data;
+    },
+    getShortComments(state, data) {
+      state.shortComments = data;
     }
   },
   actions: {
-    loadSwiper({ commit }) {
-      axios
-        .get("https://zhihu-daily.leanapp.cn/api/v1/last-stories")
-        .then(res => {
-          let swiperData = res.data.STORIES.top_stories;
-          commit("getHomeSwiper", swiperData);
-        });
-    },
-    loaArticals({ commit, state }) {
-      let date = new Date();
-      let today = date.getDate();
-      let num = state.articals.length;
-      let yeaterday = date.setDate(today - num + 1);
-      let pramsDate = new Date(yeaterday);
-      let pramsDay = pramsDate.getDate() + "";
-      let pramsMonth = pramsDate.getMonth() + 1 + "";
-      pramsDay = pramsDay.length === 1 ? "0" + pramsDay : pramsDay;
-      pramsMonth = pramsMonth.length === 1 ? "0" + pramsMonth : pramsMonth;
-      let prams = pramsDate.getFullYear() + "" + pramsMonth + pramsDay;
-      let url = "https://zhihu-daily.leanapp.cn/api/v1/before-stories/" + prams;
-      axios.get(url).then(res => {
-        let data = res.data.STORIES;
-        commit("getArtlist", data);
-      });
-    },
     loadArtContent({ commit }, id) {
       axios
         .get("https://zhihu-daily.leanapp.cn/api/v1/contents/" + id)
@@ -70,6 +63,26 @@ export default new Vuex.Store({
           let data = res.data.DES;
           commit("getExtraInfo", data);
         });
+    },
+    loadComment({ commit }, id) {
+      let getLongComments = axios.get(
+        "https://zhihu-daily.leanapp.cn/api/v1/contents/" +
+          id +
+          "/long-comments"
+      );
+      let getShortComments = axios.get(
+        "https://zhihu-daily.leanapp.cn/api/v1/contents/" +
+          id +
+          "/short-comments"
+      );
+      axios.all([getLongComments, getShortComments]).then(
+        axios.spread((longRes, shortRes) => {
+          let data1 = longRes.data.COMMENTS.comments;
+          let data2 = shortRes.data.COMMENTS.comments;
+          commit("getLongComments", data1);
+          commit("getShortComments", data2);
+        })
+      );
     }
   }
 });

@@ -5,7 +5,7 @@
     <div class="my-content-img">
       <img :src="articalContent.image" alt="图片" class="my-img">
     </div>
-    <div class="my-content-text" v-html="articalContent.body" v-if="cssLoadSucc">
+    <div class="my-content-text" v-html="articalContent.body"  ref="artContnent">
     </div>
      
     </div>
@@ -13,7 +13,6 @@
 </template>
 
 <script>
-// import BScroll from "better-scroll";
 import { mapState } from "vuex";
 export default {
   name: "ArticalContent",
@@ -23,50 +22,50 @@ export default {
   },
   data() {
     return {
-      cssLoadSucc: false
+      startY: 0
     };
   },
-  /*  created() {
-    this.$nextTick(function() {
-      this.scroll = new BScroll(this.$refs.content, {
-        pullUpLoad: {
-          threshold: 50
-        },
-        scrollbar: {
-          fade: true,
-          interactive: false
-        }
-      });
-    });
-  }, */
+  updated() {},
   watch: {
-    articalContent(val) {
-      let head = document.getElementsByTagName("head")[0];
-      let link = document.createElement("link");
-      link.rel = "stylesheet";
-      link.setAttribute("media", "all");
-      link.setAttribute("type", "text/css");
-      let href = val.css[0];
-      link.id = "artCss";
-      link.href = href;
-      head.appendChild(link);
-      this.cssLoadSucc = true;
-
-      // head.appendChild(link);
+    articalContent() {
+      this.$nextTick(() => {
+        let _this = this;
+        this.$refs.artContnent.addEventListener("touchstart", function() {
+          _this.startY = event.touches[0].clientY;
+        });
+        this.$refs.artContnent.addEventListener("touchmove", function() {
+          let scrollY = document.documentElement.scrollTop;
+          let endY = event.changedTouches[0].clientY;
+          if (scrollY < 60) {
+            let opacity = (60 - scrollY) / 60;
+            _this.$store.commit("showArtHeader", opacity);
+          } else if (_this.$store.state.artHeadShow && scrollY >= 60) {
+            _this.$store.commit("hideArtHeader");
+          }
+          if (
+            endY - _this.startY > 20 &&
+            scrollY > 60 &&
+            !_this.$store.state.artHeadShow
+          ) {
+            _this.$store.commit("showArtHeader");
+          }
+        });
+      });
     }
   }
 };
 </script>
 
+<style  src="styles/articalCss.css" >
+</style>
 <style lang="stylus" scoped>
-
 .my-content
   position absolute
   top 1.2rem
   bottom 0
   left 0
   right 0
-  
+  z-index 4
   .my-content-img
     position relative
     overflow hidden

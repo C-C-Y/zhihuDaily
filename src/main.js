@@ -8,10 +8,12 @@ import "@/assets/js/icon.js";
 import "styles/border.css";
 import VueAwesomeSwiper from "vue-awesome-swiper";
 import "swiper/dist/css/swiper.css";
+import FastClick from "fastclick";
 
 Vue.use(VueAwesomeSwiper);
 Vue.prototype.$axios = axios;
 Vue.config.productionTip = false;
+FastClick.attach(document.body);
 
 new Vue({
   router,

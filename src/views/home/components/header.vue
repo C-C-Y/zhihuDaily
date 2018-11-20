@@ -35,7 +35,9 @@ export default {
     };
   },
   methods: {
-    ...mapMutations(["handleShowMenu"])
+    ...mapMutations({
+      handleShowMenu: "menuShowChange"
+    })
   }
 };
 </script>
@@ -43,6 +45,11 @@ export default {
 <style lang="stylus" scoped>
 @import "~styles/common.styl"
 .headBox
+  position fixed
+  top 0
+  left 0
+  right 0
+  z-index 10
   line-height 1.2rem
   height 1.2rem
   background-color $homeBgc

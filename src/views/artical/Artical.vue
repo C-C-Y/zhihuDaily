@@ -1,6 +1,6 @@
 <template>
   <div class="artical">
-    <artical-header></artical-header>
+    <artical-header ></artical-header>
     <artical-content></artical-content>
   </div>
 </template>

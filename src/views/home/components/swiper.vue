@@ -2,13 +2,11 @@
 <template>
   <div class="swiper">
     <swiper :options="swiperOption"
-            ref="mySwiper">
-
-      <swiper-slide v-for="item of homeSwiperData"
+            ref="mySwiper" v-show="swiperData.length">
+      <swiper-slide v-for="item of swiperData"
                     :key=item.id><img class="swiper-img"
-             :src="item.image" @click.stop="enterDetail(item.id)">
+             :src="item.image" @click="enterDetail(item.id)">
         <div class="swiper-info">{{item.title}}</div>
-
       </swiper-slide>
       <div class="swiper-pagination"
            slot="pagination"></div>
@@ -19,7 +17,6 @@
 
 <script>
 // @ is an alias to /src
-import { mapState } from "vuex";
 export default {
   name: "HomeSwiper",
   data() {
@@ -32,7 +29,8 @@ export default {
         autoplay: 6000, // 整个轮播滑动总时间
         autoplayDisableOnInteraction: false, // 手动滑动后是否继续自动轮播 false为开启
         speed: 1000 //一个轮播页面滑动的时间
-      }
+      },
+      swiperData: []
     };
   },
   methods: {
@@ -40,8 +38,12 @@ export default {
       this.$router.push({ name: "artical", params: { id: artId } });
     }
   },
-  computed: {
-    ...mapState(["homeSwiperData"])
+  created() {
+    this.$axios
+      .get("https://zhihu-daily.leanapp.cn/api/v1/last-stories")
+      .then(res => {
+        this.swiperData = res.data.STORIES.top_stories;
+      });
   }
 };
 </script>
@@ -51,11 +53,9 @@ export default {
   background-color #fff
 .swiper
   position relative
-  overflow hidden
   height 0
   width 100%
   padding-bottom 53.3%
- 
   .swiper-img
     width 100%
     height 4rem

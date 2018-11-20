@@ -1,11 +1,11 @@
 <template>
-  <div class="headBox">
-    <router-link class="icon-return" tag="div" to="/">
+  <div class="headBox" v-show="artHeadShow" ref=articalHeader>
+    <div class="icon-return" @click="returnHome()">
       <svg class="icon"
            aria-hidden="true">
         <use xlink:href="#icon-fanhui"></use>
       </svg>
-    </router-link>
+    </div>
     <div class="icon-support icon-right">
       <svg class="icon support"
            aria-hidden="true">
@@ -13,7 +13,7 @@
       </svg>
       {{ArtExtraInfo.popularity}}
     </div>
-    <div class="icon-comment icon-right ">
+    <div class="icon-comment icon-right " @click="enterComment()">
       <svg class="icon comment"
            aria-hidden="true">
         <use xlink:href="#icon-pinglun"></use>
@@ -39,14 +39,28 @@
 import { mapState } from "vuex";
 export default {
   name: "HomeHeader",
-  data() {
-    return {
-      commentAmount: 1,
-      supportAmount: 2
-    };
+  methods: {
+    returnHome() {
+      this.$router.push("/", this.clearArtical);
+    },
+    clearArtical() {
+      this.$store.commit("clearArtical");
+    },
+    enterComment() {
+      let _this = this;
+      this.$router.push({
+        name: "comment",
+        params: { id: _this.$route.params.id }
+      });
+    }
   },
   computed: {
-    ...mapState(["ArtExtraInfo"])
+    ...mapState(["ArtExtraInfo", "artHeadShow", "headerOpacity"])
+  },
+  watch: {
+    headerOpacity(val) {
+      this.$refs.articalHeader.style.opacity = val;
+    }
   }
 };
 </script>
@@ -54,17 +68,22 @@ export default {
 <style lang="stylus" scoped>
 @import '~styles/common.styl'
 .headBox
-  position relative
+  position fixed
+  top 0 
+  right 0
+  left 0
+  z-index 5
   line-height 1.2rem
   height 1.2rem
   background-color $homeBgc
   color #fff
-  font-size 0.5rem
+  font-size 0.45rem
   .icon-return
     float left
     margin-left .25rem
     color #fff
   .icon-right
     float right
-    margin-right  .5rem
+    margin-right  .4rem
+  
 </style>
