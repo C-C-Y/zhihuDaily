@@ -26,8 +26,8 @@
         <use xlink:href="#icon-fenxiang"></use>
       </svg>
     </div>
-    <div class="icon-collect icon-right">
-      <svg class="icon clollect"
+    <div class="icon-collect icon-right" @click="collect()">
+      <svg class="icon" :class="{collect:isCollected}"
            aria-hidden="true">
         <use xlink:href="#icon-shoucang1"></use>
       </svg>
@@ -52,10 +52,16 @@ export default {
         name: "comment",
         params: { id: _this.$route.params.id }
       });
+    },
+    collect() {
+      this.$store.commit("handleCollect", this.$route.params.id);
     }
   },
   computed: {
-    ...mapState(["ArtExtraInfo", "artHeadShow", "headerOpacity"])
+    ...mapState(["ArtExtraInfo", "artHeadShow", "headerOpacity"]),
+    isCollected() {
+      return this.$store.state.collectIdList[this.$route.params.id];
+    }
   },
   watch: {
     headerOpacity(val) {
@@ -73,17 +79,18 @@ export default {
   right 0
   left 0
   z-index 5
-  line-height 1.2rem
-  height 1.2rem
+  line-height $headerHeight
+  height $headerHeight
   background-color $homeBgc
   color #fff
-  font-size 0.45rem
+  font-size 0.48rem
   .icon-return
     float left
     margin-left .25rem
     color #fff
   .icon-right
     float right
-    margin-right  .4rem
-  
+    margin-right  .48rem
+  .collect
+    color #e24
 </style>

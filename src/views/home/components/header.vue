@@ -50,15 +50,17 @@ export default {
   left 0
   right 0
   z-index 10
-  line-height 1.2rem
-  height 1.2rem
+  line-height $headerHeight
+  height $headerHeight
   background-color $homeBgc
   color #fff
   font-size .5rem
   .left
     float left
-    margin-left .5rem
+    margin-left .7rem
+  .icon-menu 
+    margin-left .4rem
   .right
     float right  
-    margin-right .5rem 
+    margin-right .7rem 
 </style>

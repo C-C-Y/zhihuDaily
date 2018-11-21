@@ -35,8 +35,8 @@ export default {
   left 0
   right 0
   z-index 2
-  height 1.2rem
-  line-height 1.2rem
+  height $headerHeight
+  line-height $headerHeight
   display flex
   font-size 0.45rem
   background-color $homeBgc

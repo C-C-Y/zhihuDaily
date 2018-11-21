@@ -11,8 +11,8 @@
            class="login">登录</a>
       </div>
       <div class="menu-content">
-        <a href="#"
-           class="collection border-bottom">
+        <a
+           class="collection border-bottom"  @click="enterCollection()">
           <svg class="icon collection-icon"
                aria-hidden="true">
             <use xlink:href="#icon-shoucang1"></use>
@@ -45,7 +45,11 @@ export default {
   methods: {
     ...mapMutations({
       hideMenu: "menuShowChange"
-    })
+    }),
+    enterCollection() {
+      this.$router.push("collected");
+      this.$store.commit("menuShowChange");
+    }
   }
 };
 </script>

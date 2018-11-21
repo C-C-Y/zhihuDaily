@@ -119,6 +119,7 @@ export default {
   width 100%
   background-color #ddd
   z-index 5
+  color #333
   .art-chunk
     padding 0.4rem 0.4rem
     .chunk-time
