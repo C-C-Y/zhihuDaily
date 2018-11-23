@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div>
     <home-header></home-header>
     <home-menu></home-menu>
     <home-content></home-content> 
@@ -19,13 +19,6 @@ export default {
     HomeHeader,
     HomeMenu,
     HomeContent
-  },
-  activated() {
-    let artCss = document.getElementById("artCss");
-    if (artCss) {
-      let head = document.getElementsByTagName("head")[0];
-      head.removeChild(artCss);
-    }
   }
 };
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div class="list"
-       v-if="articals.length" ref="artical">
+       v-if="articals.length" ref="artical" >
     <home-swiper></home-swiper>
     <ul class="art-chunk border-bottom"
         v-for="(chunk,index) of articals"
@@ -22,8 +22,8 @@
 <script>
 // import BScroll from "better-scroll";
 import HomeSwiper from "./swiper";
+import { mapState } from "vuex";
 import LoadAnimation from "@/common/loadAnimation";
-
 export default {
   name: "HomeContent",
   components: {
@@ -84,6 +84,9 @@ export default {
       }, 50);
     }
   },
+  computed: {
+    ...mapState(["menuShow"])
+  },
   updated() {
     if (!this.addEvent) {
       document.addEventListener("scroll", this.scrollEvent);
@@ -114,14 +117,14 @@ export default {
     background-color #aaa
     bottom 0.2rem
 .list
-  position absolute
+  position relative
   top 1.2rem
   width 100%
   background-color #ddd
   z-index 5
   color #333
   .art-chunk
-    padding 0.4rem 0.4rem
+    padding 0.4rem 
     .chunk-time
       font-size 0.4rem
     .art-item
@@ -139,4 +142,5 @@ export default {
         font-size 0.4rem
         width 3rem
         height 2rem
+
 </style>

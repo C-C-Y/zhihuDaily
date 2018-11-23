@@ -13,6 +13,7 @@ try {
 export default {
   menuShow: false,
   artHeadShow: true,
+  deleteMenu: false,
   articalContent: {},
   ArtExtraInfo: {},
   longComments: [],

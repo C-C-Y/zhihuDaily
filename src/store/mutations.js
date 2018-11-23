@@ -17,6 +17,9 @@ export default {
     state.headerOpacity = opacity;
     state.artHeadShow = true;
   },
+  showDelete(state) {
+    state.deleteMenu = !state.deleteMenu;
+  },
   clearArtical(state) {
     state.articalContent = {};
     state.ArtExtraInfo = {};
@@ -30,6 +33,17 @@ export default {
   },
   getShortComments(state, data) {
     state.shortComments = data;
+  },
+  clearAll(state) {
+    state.collectIdList = [];
+    state.deleteMenu = false;
+    try {
+      if (window.localStorage) {
+        localStorage.clear();
+      }
+    } catch (error) {
+      console.log(error);
+    }
   },
   handleCollect(state, id) {
     if (!state.collectIdList[id]) {

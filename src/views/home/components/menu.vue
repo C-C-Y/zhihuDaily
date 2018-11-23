@@ -1,7 +1,7 @@
 <template>
   <transition name="menu">
   <div class="menu"
-       v-show="menuShow">
+       v-show="menuShow" @touchmove.prevent="stopScroll()">
     <div class="menu-left">
       <div class="menu-header">
         <img src="@/assets/picture/1.jpg"
@@ -50,7 +50,8 @@ export default {
       this.$router.push("collected");
       this.$store.commit("menuShowChange");
     }
-  }
+  },
+  stopScroll() {}
 };
 </script>
 

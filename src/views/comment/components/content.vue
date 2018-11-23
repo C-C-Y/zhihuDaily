@@ -78,7 +78,8 @@ p
     font-size .34rem
     line-height .5rem
     .my-critics-name
+      margin-bottom .25rem
       font-size .36rem
       font-weight 600
-      margin-bottom .25rem
+      
 </style>
