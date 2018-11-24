@@ -1,13 +1,12 @@
 <template>
   <div class="my-header">
-    <router-link class="my-return"
-                 to="/"
-                 tag="div">
+    <div class="my-return"
+         @click="returnHome()">
       <svg class="icon return-icon"
            aria-hidden="true">
         <use xlink:href="#icon-fanhui"></use>
       </svg>
-    </router-link>
+    </div>
     <div class="searchBox">
       <svg class="icon search-icon"
            aria-hidden="true">
@@ -28,6 +27,10 @@ export default {
   methods: {
     showDelete() {
       this.$store.commit("showDelete");
+    },
+    returnHome() {
+      this.$router.push("/");
+      this.showDelete();
     }
   },
   props: ["canclick"],

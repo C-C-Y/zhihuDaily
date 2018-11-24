@@ -55,6 +55,9 @@ export default {
     },
     collect() {
       this.$store.commit("handleCollect", this.$route.params.id);
+      if (!window.localStorage) {
+        alert("由于您开启了无痕浏览或禁止本地缓存,关闭网页则会清空收藏列表");
+      }
     }
   },
   computed: {
