@@ -99,7 +99,7 @@ export default {
       .item-title
         float left
         font-size 0.38rem
-        width 3.5rem
+        width 3.3rem
         height 1.7rem
         text-overflow ellipsis
     .item-delete

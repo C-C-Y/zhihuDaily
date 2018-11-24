@@ -70,11 +70,13 @@ export default {
       clearTimeout(this.i);
       this.i = setTimeout(() => {
         this.addEvent = true;
-        let x = this.$refs.artical.scrollHeight;
-        let y = document.documentElement.scrollTop;
-        let z = window.innerHeight;
-        this.scroll_top = y;
-        if (x === y + z - 60) {
+        let scrollTop =
+          document.documentElement.scrollTop || document.body.scrollTop;
+        let clientHeight =
+          document.documentElement.clientHeight || document.body.clientHeight;
+        let scrollHeight = document.documentElement.scrollHeight;
+        this.scroll_top = scrollTop;
+        if (scrollTop >= scrollHeight - clientHeight) {
           this.loadShow = true;
           if (!this.loadData) {
             this.loadData = true;
