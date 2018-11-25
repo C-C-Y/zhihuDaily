@@ -3,22 +3,22 @@
        ref="content">
     <div>
     <div class="my-content-img">
-      <img :src="articalContent.image" alt="图片" class="my-img">
+      <img :src="articleContent.image" alt="图片" class="my-img">
     </div>
-    <div class="my-content-text" v-html="articalContent.body"  ref="artContnent">
+    <div class="my-content-text" v-html="articleContent.body"  ref="artContnent">
     </div>
      
     </div>
   </div>
 </template>
-
+article
 <script>
 import { mapState } from "vuex";
 export default {
-  name: "ArticalContent",
+  name: "ArticleContent",
   methods: {},
   computed: {
-    ...mapState(["articalContent"])
+    ...mapState(["articleContent"])
   },
   data() {
     return {
@@ -27,7 +27,7 @@ export default {
   },
   updated() {},
   watch: {
-    articalContent() {
+    articleContent() {
       this.$nextTick(() => {
         let _this = this;
         this.$refs.artContnent.addEventListener("touchstart", function() {
@@ -56,7 +56,7 @@ export default {
 };
 </script>
 
-<style  src="styles/articalCss.css" >
+<style  src="styles/articleCss.css" >
 </style>
 <style lang="stylus" scoped>
 .my-content

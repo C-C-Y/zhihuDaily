@@ -1,5 +1,5 @@
 <template>
-  <div class="headBox" v-show="artHeadShow" ref=articalHeader>
+  <div class="headBox" v-show="artHeadShow" ref=ArticleHeader>
     <div class="icon-return" @click="returnHome()">
       <svg class="icon"
            aria-hidden="true">
@@ -41,10 +41,10 @@ export default {
   name: "HomeHeader",
   methods: {
     returnHome() {
-      this.$router.push("/", this.clearArtical);
+      this.$router.push("/", this.clearArticle);
     },
-    clearArtical() {
-      this.$store.commit("clearArtical");
+    clearArticle() {
+      this.$store.commit("clearArticle");
     },
     enterComment() {
       let _this = this;
@@ -68,7 +68,7 @@ export default {
   },
   watch: {
     headerOpacity(val) {
-      this.$refs.articalHeader.style.opacity = val;
+      this.$refs.ArticleHeader.style.opacity = val;
     }
   }
 };

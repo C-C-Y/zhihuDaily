@@ -30,7 +30,7 @@ export default {
     },
     returnHome() {
       this.$router.push("/");
-      this.showDelete();
+      this.$store.commit("hideDelete");
     }
   },
   props: ["canclick"],

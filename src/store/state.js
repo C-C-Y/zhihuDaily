@@ -14,7 +14,7 @@ export default {
   menuShow: false,
   artHeadShow: true,
   deleteMenu: false,
-  articalContent: {},
+  articleContent: {},
   ArtExtraInfo: {},
   longComments: [],
   shortComments: [],

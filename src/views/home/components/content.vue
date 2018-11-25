@@ -1,14 +1,14 @@
 <template>
   <div class="list"
-       v-if="articals.length" ref="artical" >
+       v-if="articles.length" ref="artical" >
     <home-swiper></home-swiper>
     <ul class="art-chunk border-bottom"
-        v-for="(chunk,index) of articals"
+        v-for="(chunk,index) of articles"
         :key="index">
-      <li class="chunk-time">{{chunk.date}}</li>
+      <li class="chunk-time">{{returnDate(chunk.date)}}</li>
       <li class="art-item"
           v-for="item of chunk.stories"
-          :key="item.id" @click="enterArtical(item.id)">
+          :key="item.id" @click="enterArticle(item.id)">
         <span class="item-title">{{item.title}}</span>
         <img :src="item.images[0]"
              alt=""
@@ -32,7 +32,7 @@ export default {
   },
   data() {
     return {
-      articals: [],
+      articles: [],
       loadShow: false,
       addEvent: false,
       loadData: false,
@@ -41,13 +41,20 @@ export default {
     };
   },
   methods: {
-    enterArtical(id) {
-      this.$router.push({ name: "artical", params: { id } });
+    enterArticle(id) {
+      this.$router.push({ name: "articles", params: { id } });
+    },
+    returnDate(da) {
+      let month = da.substr(4, 2);
+      month = Number(month) + "月";
+      let day = da.substr(6, 2);
+      day = Number(day) + "日";
+      return month + day;
     },
     getParams() {
       let date = new Date();
       let today = date.getDate();
-      let num = this.articals.length;
+      let num = this.articles.length;
       let yeaterday = date.setDate(today - num + 1);
       let paramsDate = new Date(yeaterday);
       let paramsDay = paramsDate.getDate() + "";
@@ -63,7 +70,7 @@ export default {
         "https://zhihu-daily.leanapp.cn/api/v1/before-stories/" + params;
       this.$axios.get(url).then(res => {
         let data = res.data.STORIES;
-        this.articals.push(data);
+        this.articles.push(data);
       });
     },
     scrollEvent() {
@@ -95,7 +102,7 @@ export default {
     }
   },
   watch: {
-    articals() {
+    articles() {
       this.loadShow = false;
       this.loadData = false;
     }

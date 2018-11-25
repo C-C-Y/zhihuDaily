@@ -12,15 +12,15 @@ export default new Router({
       component: Home
     },
     {
-      path: "/artical/:id",
-      name: "artical",
+      path: "/articles/:id",
+      name: "articles",
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import("./views/artical/Artical.vue")
+      component: () => import("./views/articles/Articles.vue")
     },
     {
-      path: "/artical/:id/comment",
+      path: "/articles/:id/comment",
       name: "comment",
       component: () => import("./views/comment/Comment.vue")
     },

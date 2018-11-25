@@ -1,18 +1,18 @@
 <template>
-  <div class="artical">
-    <artical-header ></artical-header>
-    <artical-content></artical-content>
+  <div class="articles">
+    <articles-header ></articles-header>
+    <articles-content></articles-content>
   </div>
 </template>
 
 <script>
-import ArticalHeader from "./components/header";
-import ArticalContent from "./components/content";
+import ArticlesHeader from "./components/header";
+import ArticlesContent from "./components/content";
 export default {
-  name: "artical",
+  name: "articles",
   components: {
-    ArticalHeader,
-    ArticalContent
+    ArticlesHeader,
+    ArticlesContent
   },
   created() {
     this.$store.dispatch("loadArtContent", this.$route.params.id);

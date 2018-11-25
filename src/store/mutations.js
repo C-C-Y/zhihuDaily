@@ -4,7 +4,7 @@ export default {
     state.menuShow = !state.menuShow;
   },
   getArtContent(state, data) {
-    state.articalContent = data;
+    state.articleContent = data;
   },
   getExtraInfo(state, data) {
     state.ArtExtraInfo = data;
@@ -20,8 +20,11 @@ export default {
   showDelete(state) {
     state.deleteMenu = !state.deleteMenu;
   },
-  clearArtical(state) {
-    state.articalContent = {};
+  hideDelete(state) {
+    state.deleteMenu = false;
+  },
+  clearArticle(state) {
+    state.articleContent = {};
     state.ArtExtraInfo = {};
   },
   clearComments(state) {

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <keep-alive exclude="artical,comment,collected">
+    <keep-alive exclude="articles,comment,collected">
     <router-view/>
     </keep-alive>
   </div>
