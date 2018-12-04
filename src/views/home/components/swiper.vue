@@ -34,7 +34,7 @@ export default {
   },
   methods: {
     enterDetail(artId) {
-      this.$router.push({ name: "artical", params: { id: artId } });
+      this.$router.push({ name: "articles", params: { id: artId } });
     }
   },
   created() {
