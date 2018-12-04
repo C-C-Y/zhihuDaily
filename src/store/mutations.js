@@ -45,7 +45,7 @@ export default {
         localStorage.clear();
       }
     } catch (error) {
-      console.log(error);
+      state.errorInfo.push(error);
     }
   },
   handleCollect(state, id) {
@@ -62,7 +62,7 @@ export default {
           localStorage.setItem("idList", JSON.stringify(collectIdList));
         }
       } catch (error) {
-        console.log(error);
+        state.errorInfo.push(error);
       }
     } else {
       Vue.delete(state.collectIdList, id);
@@ -71,7 +71,7 @@ export default {
         delete collectIdList[id];
         localStorage.setItem("idList", JSON.stringify(collectIdList));
       } catch (error) {
-        console.log(error);
+        state.errorInfo.push(error);
       }
     }
   }

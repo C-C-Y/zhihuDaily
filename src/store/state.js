@@ -19,5 +19,6 @@ export default {
   longComments: [],
   shortComments: [],
   headerOpacity: 1,
-  collectIdList: defaultList
+  collectIdList: defaultList,
+  errorInfo: []
 };
